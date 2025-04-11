@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Quant Small Cap Fund", "code": 876, "type": "small"
+    },
+    {
+        "name": "Quant Mid Cap Fund", "code": 887, "type": "mid"
+    },
+    {
+        "name": "Quant Large Cap Fund", "code": 874, "type": "large"
+    },
+    {
+        "name": "Aaditya Birla Sun Life Small Cap Fund", "code": 477, "type": "small"
+    },
+    {
+        "name": "Aaditya Birla Sun Life Mid Cap Fund", "code": 417, "type": "mid"
+    }
+]

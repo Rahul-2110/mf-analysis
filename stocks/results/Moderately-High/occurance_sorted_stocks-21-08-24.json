@@ -1,0 +1,1037 @@
+[
+    {
+        "name": "Suzlon Energy Ltd.",
+        "percentage": 205.69177872000014,
+        "count": 95
+    },
+    {
+        "name": "Max Healthcare Institute Ltd.",
+        "percentage": 225.27238228000044,
+        "count": 88
+    },
+    {
+        "name": "NHPC Ltd.",
+        "percentage": 183.92574155999972,
+        "count": 88
+    },
+    {
+        "name": "Dixon Technologies (India) Ltd.",
+        "percentage": 146.11490564,
+        "count": 88
+    },
+    {
+        "name": "Bharat Electronics Ltd.",
+        "percentage": 259.04528067999985,
+        "count": 72
+    },
+    {
+        "name": "JIO Financial Services Ltd.",
+        "percentage": 497.6656359899998,
+        "count": 65
+    },
+    {
+        "name": "Zomato Ltd.",
+        "percentage": 448.54122454000026,
+        "count": 65
+    },
+    {
+        "name": "Siemens Ltd.",
+        "percentage": 152.76106029999988,
+        "count": 65
+    },
+    {
+        "name": "Bharti Airtel Ltd.",
+        "percentage": 135.10136885,
+        "count": 65
+    },
+    {
+        "name": "DLF Ltd.",
+        "percentage": 94.44516597999996,
+        "count": 65
+    },
+    {
+        "name": "Larsen & Toubro Ltd.",
+        "percentage": 269.4378681000002,
+        "count": 58
+    },
+    {
+        "name": "Hindustan Aeronautics Ltd.",
+        "percentage": 183.35000000000016,
+        "count": 58
+    },
+    {
+        "name": "Bharat Dynamics Ltd.",
+        "percentage": 124.57999475000003,
+        "count": 58
+    },
+    {
+        "name": "The Phoenix Mills Ltd.",
+        "percentage": 107.04895788000003,
+        "count": 58
+    },
+    {
+        "name": "Vodafone Idea Ltd.",
+        "percentage": 435.0403521199998,
+        "count": 51
+    },
+    {
+        "name": "Kalyan Jewellers India Ltd.",
+        "percentage": 367.14831806999973,
+        "count": 51
+    },
+    {
+        "name": "Tube Investments Of India Ltd.",
+        "percentage": 355.4942667400003,
+        "count": 51
+    },
+    {
+        "name": "Prestige Estates Projects Ltd.",
+        "percentage": 229.24090909000012,
+        "count": 51
+    },
+    {
+        "name": "Coforge Ltd.",
+        "percentage": 190.37206813000014,
+        "count": 51
+    },
+    {
+        "name": "Tata Power Company Ltd.",
+        "percentage": 183.5800000000001,
+        "count": 51
+    },
+    {
+        "name": "NTPC Ltd.",
+        "percentage": 180.41999999999987,
+        "count": 51
+    },
+    {
+        "name": "REC Ltd.",
+        "percentage": 138.31000000000006,
+        "count": 51
+    },
+    {
+        "name": "ABB India Ltd.",
+        "percentage": 133.18000000000018,
+        "count": 51
+    },
+    {
+        "name": "KPIT Technologies Ltd.",
+        "percentage": 132.66527392000003,
+        "count": 51
+    },
+    {
+        "name": "Bharat Petroleum Corporation Ltd.",
+        "percentage": 129.1499999999999,
+        "count": 51
+    },
+    {
+        "name": "Ratnamani Metals & Tubes Ltd.",
+        "percentage": 122.07532320999997,
+        "count": 51
+    },
+    {
+        "name": "BEML Ltd.",
+        "percentage": 121.42888440999988,
+        "count": 51
+    },
+    {
+        "name": "Indian Railway Catering And Tourism Corporation Ltd.",
+        "percentage": 119.46000000000001,
+        "count": 51
+    },
+    {
+        "name": "Kei Industries Ltd.",
+        "percentage": 116.2399999999999,
+        "count": 51
+    },
+    {
+        "name": "Global Health Ltd.",
+        "percentage": 110.51799320999997,
+        "count": 51
+    },
+    {
+        "name": "GAIL (India) Ltd.",
+        "percentage": 94.35000000000001,
+        "count": 51
+    },
+    {
+        "name": "Angel One Ltd.",
+        "percentage": 87.30462407000007,
+        "count": 51
+    },
+    {
+        "name": "Power Grid Corporation Of India Ltd.",
+        "percentage": 312.40000000000003,
+        "count": 44
+    },
+    {
+        "name": "Persistent Systems Ltd.",
+        "percentage": 309.1264686400001,
+        "count": 44
+    },
+    {
+        "name": "Polycab India Ltd.",
+        "percentage": 185.78555115999984,
+        "count": 44
+    },
+    {
+        "name": "Balkrishna Industries Ltd.",
+        "percentage": 181.0370113199999,
+        "count": 44
+    },
+    {
+        "name": "Voltas Ltd.",
+        "percentage": 172.94050752000007,
+        "count": 44
+    },
+    {
+        "name": "Thermax Ltd.",
+        "percentage": 146.07999999999984,
+        "count": 44
+    },
+    {
+        "name": "Deepak Nitrite Ltd.",
+        "percentage": 139.35593672000005,
+        "count": 44
+    },
+    {
+        "name": "Solar Industries India Ltd.",
+        "percentage": 133.7600000000001,
+        "count": 44
+    },
+    {
+        "name": "Aurobindo Pharma Ltd.",
+        "percentage": 125.67451116000001,
+        "count": 44
+    },
+    {
+        "name": "Container Corporation Of India Ltd.",
+        "percentage": 119.23999999999988,
+        "count": 44
+    },
+    {
+        "name": "Jyoti CNC Automation Ltd.",
+        "percentage": 106.48000000000006,
+        "count": 44
+    },
+    {
+        "name": "Rail Vikas Nigam Ltd.",
+        "percentage": 105.18841035999999,
+        "count": 44
+    },
+    {
+        "name": "SJVN Ltd.",
+        "percentage": 97.31293000000004,
+        "count": 44
+    },
+    {
+        "name": "Rolex Rings Ltd",
+        "percentage": 96.80000000000007,
+        "count": 44
+    },
+    {
+        "name": "Cochin Shipyard Ltd.",
+        "percentage": 89.32000000000004,
+        "count": 44
+    },
+    {
+        "name": "Timken India Ltd.",
+        "percentage": 87.55999999999996,
+        "count": 44
+    },
+    {
+        "name": "Gujarat State Petronet Ltd.",
+        "percentage": 87.12,
+        "count": 44
+    },
+    {
+        "name": "PNC Infratech Ltd.",
+        "percentage": 80.07999999999994,
+        "count": 44
+    },
+    {
+        "name": "JNK India Ltd.",
+        "percentage": 73.92000000000003,
+        "count": 44
+    },
+    {
+        "name": "Honeywell Automation India Ltd.",
+        "percentage": 73.48000000000005,
+        "count": 44
+    },
+    {
+        "name": "The Ramco Cements Ltd.",
+        "percentage": 60.720000000000034,
+        "count": 44
+    },
+    {
+        "name": "Grindwell Norton Ltd.",
+        "percentage": 53.67999999999997,
+        "count": 44
+    },
+    {
+        "name": "Indus Towers Ltd.",
+        "percentage": 45.1503008,
+        "count": 44
+    },
+    {
+        "name": "Supreme Industries Ltd.",
+        "percentage": 42.67999999999997,
+        "count": 44
+    },
+    {
+        "name": "ZF Commercial Vehicle Control Systems India Ltd.",
+        "percentage": 38.279999999999994,
+        "count": 44
+    },
+    {
+        "name": "GR Infraprojects Ltd.",
+        "percentage": 38.279999999999994,
+        "count": 44
+    },
+    {
+        "name": "Kajaria Ceramics Ltd.",
+        "percentage": 37.40000000000003,
+        "count": 44
+    },
+    {
+        "name": "Birla Corporation Ltd.",
+        "percentage": 35.63999999999999,
+        "count": 44
+    },
+    {
+        "name": "H.G. Infra Engineering Ltd.",
+        "percentage": 33.440000000000026,
+        "count": 44
+    },
+    {
+        "name": "Craftsman Automation Ltd.",
+        "percentage": 33,
+        "count": 44
+    },
+    {
+        "name": "Jamna Auto Industries Ltd.",
+        "percentage": 31.240000000000027,
+        "count": 44
+    },
+    {
+        "name": "Tips Industries Ltd.",
+        "percentage": 28.426638679999986,
+        "count": 44
+    },
+    {
+        "name": "Triveni Turbine Ltd.",
+        "percentage": 27.71999999999999,
+        "count": 44
+    },
+    {
+        "name": "Interglobe Aviation Ltd.",
+        "percentage": 88.07161278999999,
+        "count": 28
+    },
+    {
+        "name": "Trent Ltd.",
+        "percentage": 101.66802414999998,
+        "count": 21
+    },
+    {
+        "name": "TVS Motor Company Ltd.",
+        "percentage": 43.687248849999996,
+        "count": 21
+    },
+    {
+        "name": "Ambuja Cements Ltd.",
+        "percentage": 45.24581873,
+        "count": 14
+    },
+    {
+        "name": "Bharti Airtel Ltd. - (Partly Paid up Equity Shares (Rights Issue))",
+        "percentage": 41.16777721,
+        "count": 14
+    },
+    {
+        "name": "Cholamandalam Investment and Finance Company Ltd.",
+        "percentage": 38.220000000000006,
+        "count": 14
+    },
+    {
+        "name": "Power Finance Corporation Ltd.",
+        "percentage": 37.77427465,
+        "count": 14
+    },
+    {
+        "name": "Jindal Stainless Ltd.",
+        "percentage": 37.412129019999995,
+        "count": 14
+    },
+    {
+        "name": "Inox Wind Ltd.",
+        "percentage": 37.32131011,
+        "count": 14
+    },
+    {
+        "name": "CG Power and Industrial Solutions Ltd.",
+        "percentage": 36.605541419999994,
+        "count": 14
+    },
+    {
+        "name": "Indusind Bank Ltd.",
+        "percentage": 35.336928480000005,
+        "count": 14
+    },
+    {
+        "name": "Vedanta Ltd.",
+        "percentage": 32.734146759999994,
+        "count": 14
+    },
+    {
+        "name": "Multi Commodity Exchange Of India Ltd.",
+        "percentage": 32.01977114,
+        "count": 14
+    },
+    {
+        "name": "Sobha Ltd.",
+        "percentage": 30.247488809999997,
+        "count": 14
+    },
+    {
+        "name": "ICICI Bank Ltd.",
+        "percentage": 28.98430297,
+        "count": 14
+    },
+    {
+        "name": "BSE Ltd.",
+        "percentage": 25.949522060000003,
+        "count": 14
+    },
+    {
+        "name": "Pidilite Industries Ltd.",
+        "percentage": 23.59,
+        "count": 14
+    },
+    {
+        "name": "Jindal Steel & Power Ltd.",
+        "percentage": 22.583864100000003,
+        "count": 14
+    },
+    {
+        "name": "Tech Mahindra Ltd.",
+        "percentage": 20.11650396,
+        "count": 14
+    },
+    {
+        "name": "Bank Of Baroda",
+        "percentage": 20.10896286,
+        "count": 14
+    },
+    {
+        "name": "Axis Bank Ltd.",
+        "percentage": 18.627636439999996,
+        "count": 14
+    },
+    {
+        "name": "ICICI Prudential Life Insurance Company Ltd.",
+        "percentage": 15.323621460000002,
+        "count": 14
+    },
+    {
+        "name": "Titan Company Ltd.",
+        "percentage": 15.206608759999996,
+        "count": 14
+    },
+    {
+        "name": "eClerx Services Ltd.",
+        "percentage": 1.4841744399999999,
+        "count": 14
+    },
+    {
+        "name": "Nippon India ETF Nifty Next 50 Junior BeES",
+        "percentage": 700.07,
+        "count": 7
+    },
+    {
+        "name": "State Bank of India",
+        "percentage": 35.35,
+        "count": 7
+    },
+    {
+        "name": "Ultratech Cement Ltd.",
+        "percentage": 25.365112640000003,
+        "count": 7
+    },
+    {
+        "name": "Fortis Healthcare Ltd.",
+        "percentage": 23.240409430000003,
+        "count": 7
+    },
+    {
+        "name": "Arvind Ltd.",
+        "percentage": 21.419999999999998,
+        "count": 7
+    },
+    {
+        "name": "IDFC First Bank Ltd.",
+        "percentage": 20.84139519,
+        "count": 7
+    },
+    {
+        "name": "Indian Oil Corporation Ltd.",
+        "percentage": 20.65,
+        "count": 7
+    },
+    {
+        "name": "Kaynes Technology India Ltd.",
+        "percentage": 18.787212359999998,
+        "count": 7
+    },
+    {
+        "name": "Mankind Pharma Ltd.",
+        "percentage": 17.444982099999997,
+        "count": 7
+    },
+    {
+        "name": "Godrej Consumer Products Ltd.",
+        "percentage": 16.659999999999997,
+        "count": 7
+    },
+    {
+        "name": "Amber Enterprises India Ltd.",
+        "percentage": 16.61971682,
+        "count": 7
+    },
+    {
+        "name": "Havells India Ltd.",
+        "percentage": 16.590000000000003,
+        "count": 7
+    },
+    {
+        "name": "Apar Industries Ltd.",
+        "percentage": 16.155177570000003,
+        "count": 7
+    },
+    {
+        "name": "Maruti Suzuki India Ltd.",
+        "percentage": 15.899834370000004,
+        "count": 7
+    },
+    {
+        "name": "Info Edge (India) Ltd.",
+        "percentage": 15.329999999999998,
+        "count": 7
+    },
+    {
+        "name": "Century Textiles & Industries Ltd.",
+        "percentage": 15.120000000000001,
+        "count": 7
+    },
+    {
+        "name": "Gujarat Fluorochemicals Ltd.",
+        "percentage": 14.62564964,
+        "count": 7
+    },
+    {
+        "name": "JSW Steel Ltd.",
+        "percentage": 14.535450930000001,
+        "count": 7
+    },
+    {
+        "name": "Lupin Ltd.",
+        "percentage": 14.468867770000001,
+        "count": 7
+    },
+    {
+        "name": "Tata Consultancy Services Ltd.",
+        "percentage": 14.420000000000002,
+        "count": 7
+    },
+    {
+        "name": "ICICI Lombard General Insurance Company Ltd.",
+        "percentage": 14,
+        "count": 7
+    },
+    {
+        "name": "Jana Small Finance Bank Ltd.",
+        "percentage": 14,
+        "count": 7
+    },
+    {
+        "name": "Canara Bank",
+        "percentage": 13.720000000000002,
+        "count": 7
+    },
+    {
+        "name": "Oil & Natural Gas Corporation Ltd.",
+        "percentage": 13.649999999999999,
+        "count": 7
+    },
+    {
+        "name": "Punjab National Bank",
+        "percentage": 13.37,
+        "count": 7
+    },
+    {
+        "name": "Welspun Corp Ltd.",
+        "percentage": 13.019790910000001,
+        "count": 7
+    },
+    {
+        "name": "Hindustan Petroleum Corporation Ltd.",
+        "percentage": 12.817129989999998,
+        "count": 7
+    },
+    {
+        "name": "Bharat Forge Ltd.",
+        "percentage": 12.81396354,
+        "count": 7
+    },
+    {
+        "name": "Mangalore Refinery And Petrochemicals Ltd.",
+        "percentage": 12.595215360000001,
+        "count": 7
+    },
+    {
+        "name": "Samvardhana Motherson International Ltd.",
+        "percentage": 12.459999999999999,
+        "count": 7
+    },
+    {
+        "name": "Colgate-Palmolive (India) Ltd.",
+        "percentage": 12.25,
+        "count": 7
+    },
+    {
+        "name": "Hero Motocorp Ltd.",
+        "percentage": 11.9100331,
+        "count": 7
+    },
+    {
+        "name": "United Spirits Ltd.",
+        "percentage": 11.69,
+        "count": 7
+    },
+    {
+        "name": "Finolex Cables Ltd.",
+        "percentage": 11.62,
+        "count": 7
+    },
+    {
+        "name": "Sterling and Wilson Renewable Energy Ltd.",
+        "percentage": 11.62,
+        "count": 7
+    },
+    {
+        "name": "Shree Cement Ltd.",
+        "percentage": 11.409999999999997,
+        "count": 7
+    },
+    {
+        "name": "Finolex Industries Ltd.",
+        "percentage": 11.409999999999997,
+        "count": 7
+    },
+    {
+        "name": "SRF Ltd.",
+        "percentage": 11.13,
+        "count": 7
+    },
+    {
+        "name": "Dabur India Ltd.",
+        "percentage": 11.06,
+        "count": 7
+    },
+    {
+        "name": "Mahindra & Mahindra Ltd.",
+        "percentage": 10.850000000000001,
+        "count": 7
+    },
+    {
+        "name": "Marico Ltd.",
+        "percentage": 10.709999999999999,
+        "count": 7
+    },
+    {
+        "name": "Ceat Ltd.",
+        "percentage": 10.639999999999999,
+        "count": 7
+    },
+    {
+        "name": "Tata Motors Ltd.",
+        "percentage": 10.079999999999998,
+        "count": 7
+    },
+    {
+        "name": "Religare Enterprises Ltd.",
+        "percentage": 10.045081199999998,
+        "count": 7
+    },
+    {
+        "name": "Tata Steel Ltd.",
+        "percentage": 9.985629710000001,
+        "count": 7
+    },
+    {
+        "name": "Jindal Saw Ltd.",
+        "percentage": 9.87,
+        "count": 7
+    },
+    {
+        "name": "Muthoot Finance Ltd.",
+        "percentage": 9.71102909,
+        "count": 7
+    },
+    {
+        "name": "Tata Motors Ltd. - DVR Ordinary",
+        "percentage": 9.65095467,
+        "count": 7
+    },
+    {
+        "name": "HDFC Bank Ltd.",
+        "percentage": 9.59,
+        "count": 7
+    },
+    {
+        "name": "ITC Ltd.",
+        "percentage": 9.1,
+        "count": 7
+    },
+    {
+        "name": "Reliance Industries Ltd.",
+        "percentage": 9.1,
+        "count": 7
+    },
+    {
+        "name": "Bosch Ltd.",
+        "percentage": 9.030000000000001,
+        "count": 7
+    },
+    {
+        "name": "NMDC Steel Ltd.",
+        "percentage": 8.933228499999998,
+        "count": 7
+    },
+    {
+        "name": "Zydus Lifesciences Ltd.",
+        "percentage": 8.75,
+        "count": 7
+    },
+    {
+        "name": "Grasim Industries Ltd.",
+        "percentage": 8.65853989,
+        "count": 7
+    },
+    {
+        "name": "Torrent Pharmaceuticals Ltd.",
+        "percentage": 8.54,
+        "count": 7
+    },
+    {
+        "name": "Divi's Laboratories Ltd.",
+        "percentage": 8.48614487,
+        "count": 7
+    },
+    {
+        "name": "Nava Ltd.",
+        "percentage": 8.469999999999999,
+        "count": 7
+    },
+    {
+        "name": "UPL Ltd.",
+        "percentage": 8.458174620000001,
+        "count": 7
+    },
+    {
+        "name": "Bharti Hexacom Ltd.",
+        "percentage": 7.420000000000002,
+        "count": 7
+    },
+    {
+        "name": "NLC India Ltd.",
+        "percentage": 7.35,
+        "count": 7
+    },
+    {
+        "name": "Adani Power Ltd.",
+        "percentage": 7.139999999999999,
+        "count": 7
+    },
+    {
+        "name": "Adani Green Energy Ltd.",
+        "percentage": 7.069999999999999,
+        "count": 7
+    },
+    {
+        "name": "SBI Cards And Payment Services Ltd.",
+        "percentage": 7.069999999999999,
+        "count": 7
+    },
+    {
+        "name": "Varun Beverages Ltd.",
+        "percentage": 7,
+        "count": 7
+    },
+    {
+        "name": "HDFC Asset Management Company Ltd.",
+        "percentage": 6.832999739999999,
+        "count": 7
+    },
+    {
+        "name": "Godrej Properties Ltd.",
+        "percentage": 6.827986200000002,
+        "count": 7
+    },
+    {
+        "name": "Gland Pharma Ltd.",
+        "percentage": 6.70282389,
+        "count": 7
+    },
+    {
+        "name": "Avenue Supermarts Ltd.",
+        "percentage": 6.579999999999998,
+        "count": 7
+    },
+    {
+        "name": "RHI Magnesita India Ltd.",
+        "percentage": 6.00611935,
+        "count": 7
+    },
+    {
+        "name": "CreditAccess Grameen Ltd.",
+        "percentage": 5.53,
+        "count": 7
+    },
+    {
+        "name": "Bajaj Auto Ltd.",
+        "percentage": 5.52552427,
+        "count": 7
+    },
+    {
+        "name": "CarTrade Tech Ltd.",
+        "percentage": 5.46483413,
+        "count": 7
+    },
+    {
+        "name": "Max Financial Services Ltd.",
+        "percentage": 5.460000000000001,
+        "count": 7
+    },
+    {
+        "name": "Cummins India Ltd.",
+        "percentage": 5.446275310000001,
+        "count": 7
+    },
+    {
+        "name": "Aarti Industries Ltd.",
+        "percentage": 5.37986806,
+        "count": 7
+    },
+    {
+        "name": "UTI Asset Management Company Ltd.",
+        "percentage": 5.37916442,
+        "count": 7
+    },
+    {
+        "name": "Tega Industries Ltd.",
+        "percentage": 5.319999999999999,
+        "count": 7
+    },
+    {
+        "name": "KSB Ltd.",
+        "percentage": 5.06234456,
+        "count": 7
+    },
+    {
+        "name": "Glaxosmithkline Pharmaceuticals Ltd.",
+        "percentage": 4.9,
+        "count": 7
+    },
+    {
+        "name": "Gujarat Gas Ltd.",
+        "percentage": 4.71333261,
+        "count": 7
+    },
+    {
+        "name": "The Karnataka Bank Ltd.",
+        "percentage": 4.51622178,
+        "count": 7
+    },
+    {
+        "name": "Berger Paints India Ltd.",
+        "percentage": 4.48,
+        "count": 7
+    },
+    {
+        "name": "TVS Srichakra Ltd.",
+        "percentage": 4.27,
+        "count": 7
+    },
+    {
+        "name": "Mastek Ltd.",
+        "percentage": 4.1906942,
+        "count": 7
+    },
+    {
+        "name": "Eicher Motors Ltd.",
+        "percentage": 4.163427659999999,
+        "count": 7
+    },
+    {
+        "name": "PI Industries Ltd.",
+        "percentage": 4.04741288,
+        "count": 7
+    },
+    {
+        "name": "APL Apollo Tubes Ltd.",
+        "percentage": 3.9709785500000003,
+        "count": 7
+    },
+    {
+        "name": "EPL Ltd.",
+        "percentage": 3.5875755299999996,
+        "count": 7
+    },
+    {
+        "name": "Bajaj Holdings & Investment Ltd.",
+        "percentage": 3.5,
+        "count": 7
+    },
+    {
+        "name": "Adani Energy Solutions Ltd.",
+        "percentage": 3.4300000000000006,
+        "count": 7
+    },
+    {
+        "name": "Divgi TorqTransfer Systems Ltd.",
+        "percentage": 3.3884417000000004,
+        "count": 7
+    },
+    {
+        "name": "Vardhman Textiles Ltd.",
+        "percentage": 3.3678598099999997,
+        "count": 7
+    },
+    {
+        "name": "Indian Railway Finance Corporation Ltd.",
+        "percentage": 3.289999999999999,
+        "count": 7
+    },
+    {
+        "name": "Steel Authority Of India Ltd.",
+        "percentage": 3.289999999999999,
+        "count": 7
+    },
+    {
+        "name": "Himatsingka Seide Ltd.",
+        "percentage": 3.1937056900000003,
+        "count": 7
+    },
+    {
+        "name": "Jubilant FoodWorks Ltd.",
+        "percentage": 3.0812971,
+        "count": 7
+    },
+    {
+        "name": "Glenmark Pharmaceuticals Ltd.",
+        "percentage": 3.06185866,
+        "count": 7
+    },
+    {
+        "name": "Hindalco Industries Ltd.",
+        "percentage": 3.0593079299999997,
+        "count": 7
+    },
+    {
+        "name": "Nippon Life India Asset Management Ltd.",
+        "percentage": 3.00600622,
+        "count": 7
+    },
+    {
+        "name": "Adani Total Gas Ltd.",
+        "percentage": 2.94,
+        "count": 7
+    },
+    {
+        "name": "AIA Engineering Ltd.",
+        "percentage": 2.62075611,
+        "count": 7
+    },
+    {
+        "name": "Life Insurance Corporation of India",
+        "percentage": 2.5900000000000003,
+        "count": 7
+    },
+    {
+        "name": "Nitin Spinners Ltd.",
+        "percentage": 2.24,
+        "count": 7
+    },
+    {
+        "name": "Indiabulls Housing Finance Ltd- PPE",
+        "percentage": 2.03,
+        "count": 7
+    },
+    {
+        "name": "Nazara Technologies Ltd.",
+        "percentage": 1.8428675299999995,
+        "count": 7
+    },
+    {
+        "name": "Updater Services Ltd.",
+        "percentage": 1.68,
+        "count": 7
+    },
+    {
+        "name": "Chalet Hotels Ltd.",
+        "percentage": 1.5198907499999996,
+        "count": 7
+    },
+    {
+        "name": "Bajaj Electricals Ltd.",
+        "percentage": 1.4885782099999998,
+        "count": 7
+    },
+    {
+        "name": "Star Health and Allied Insurance Company Ltd.",
+        "percentage": 0.9999790500000001,
+        "count": 7
+    },
+    {
+        "name": "Sagar Cements Ltd.",
+        "percentage": 0.9869614299999999,
+        "count": 7
+    },
+    {
+        "name": "Zee Entertainment Enterprises Ltd.",
+        "percentage": 0.9167720800000001,
+        "count": 7
+    },
+    {
+        "name": "Syngene International Ltd.",
+        "percentage": 0.74631207,
+        "count": 7
+    },
+    {
+        "name": "Orient Cement Ltd.",
+        "percentage": 0.74490479,
+        "count": 7
+    },
+    {
+        "name": "Adani Ports and Special Economic Zone Ltd.",
+        "percentage": 0.69204282,
+        "count": 7
+    },
+    {
+        "name": "Thyrocare Technologies Ltd.",
+        "percentage": 0.6801687200000001,
+        "count": 7
+    },
+    {
+        "name": "Aditya Birla Sun Life AMC Ltd.",
+        "percentage": 0.49035826,
+        "count": 7
+    },
+    {
+        "name": "Grasim Industries - (Partly Paid Equity)",
+        "percentage": 0.15172513999999998,
+        "count": 7
+    }
+]
