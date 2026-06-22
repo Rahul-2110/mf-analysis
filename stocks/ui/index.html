@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MF Stock Overlap</title>
+  <link rel="stylesheet" href="/ui/style.css">
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>MF Stock Overlap</h1>
+      <p class="subtitle">Common equity holdings across mutual funds</p>
+    </div>
+    <div class="controls">
+      <label>
+        Risk
+        <select id="risk"></select>
+      </label>
+      <label>
+        Date
+        <select id="date"></select>
+      </label>
+    </div>
+  </header>
+
+  <section id="stats" class="stats"></section>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="coverage">By coverage</button>
+    <button class="tab" data-tab="weight">By avg weight</button>
+    <button class="tab" data-tab="changes">Day changes</button>
+  </nav>
+
+  <main>
+    <section id="panel-coverage" class="panel active" data-panel="coverage">
+      <div class="panel-head">
+        <h2>Most common equities</h2>
+        <span id="count-coverage" class="result-count"></span>
+      </div>
+      <div class="filters">
+        <input type="search" id="search-coverage" placeholder="Search name or sector…">
+        <label>
+          Sector
+          <select id="sector-coverage"><option value="">All</option></select>
+        </label>
+        <label>
+          Min funds
+          <input type="number" id="min-funds-coverage" min="0" placeholder="0">
+        </label>
+        <label>
+          Min coverage %
+          <input type="number" id="min-coverage" min="0" max="100" step="0.1" placeholder="0">
+        </label>
+        <label>
+          Min avg weight %
+          <input type="number" id="min-weight-coverage" min="0" step="0.1" placeholder="0">
+        </label>
+        <button type="button" class="btn-reset" data-reset="coverage">Reset</button>
+      </div>
+      <div id="chart-coverage" class="chart"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" data-panel="coverage" data-sort="name">Stock</th>
+              <th class="sortable" data-panel="coverage" data-sort="sector">Sector</th>
+              <th class="sortable" data-panel="coverage" data-sort="fundCount">Funds</th>
+              <th class="sortable" data-panel="coverage" data-sort="coveragePercent">Coverage</th>
+              <th class="sortable" data-panel="coverage" data-sort="avgWeight">Avg weight</th>
+            </tr>
+          </thead>
+          <tbody id="table-coverage"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="panel-weight" class="panel" data-panel="weight">
+      <div class="panel-head">
+        <h2>Highest average weights</h2>
+        <span id="count-weight" class="result-count"></span>
+      </div>
+      <div class="filters">
+        <input type="search" id="search-weight" placeholder="Search name or sector…">
+        <label>
+          Sector
+          <select id="sector-weight"><option value="">All</option></select>
+        </label>
+        <label>
+          Min funds
+          <input type="number" id="min-funds-weight" min="0" placeholder="0">
+        </label>
+        <label>
+          Min avg weight %
+          <input type="number" id="min-weight-weight" min="0" step="0.1" placeholder="0">
+        </label>
+        <label>
+          Min max weight %
+          <input type="number" id="min-max-weight" min="0" step="0.1" placeholder="0">
+        </label>
+        <button type="button" class="btn-reset" data-reset="weight">Reset</button>
+      </div>
+      <div id="chart-weight" class="chart"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th class="sortable" data-panel="weight" data-sort="name">Stock</th>
+              <th class="sortable" data-panel="weight" data-sort="sector">Sector</th>
+              <th class="sortable" data-panel="weight" data-sort="avgWeight">Avg weight</th>
+              <th class="sortable" data-panel="weight" data-sort="fundCount">Funds</th>
+              <th class="sortable" data-panel="weight" data-sort="maxWeight">Max</th>
+              <th class="sortable" data-panel="weight" data-sort="minWeight">Min</th>
+            </tr>
+          </thead>
+          <tbody id="table-weight"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="panel-changes" class="panel">
+      <div id="changes-empty" class="empty hidden">No day-over-day comparison for this date. Run the fetch on consecutive days to generate changes.</div>
+      <div id="changes-content" class="hidden">
+        <div class="filters">
+          <input type="search" id="search-changes" placeholder="Search changes…">
+          <label>
+            Sort by
+            <select id="sort-changes">
+              <option value="changes-desc">Most changes</option>
+              <option value="name-asc">Fund / stock name A–Z</option>
+              <option value="name-desc">Fund / stock name Z–A</option>
+            </select>
+          </label>
+        </div>
+        <div class="changes-grid">
+          <div class="card">
+            <h3>Funds with holding changes <span id="count-fund-changes" class="badge"></span></h3>
+            <ul id="fund-changes-list"></ul>
+          </div>
+          <div class="card">
+            <h3>Stock coverage movers <span id="count-stock-changes" class="badge"></span></h3>
+            <ul id="stock-changes-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detail-dialog">
+    <div class="dialog-head">
+      <h2 id="detail-title"></h2>
+      <button type="button" id="detail-close" aria-label="Close">&times;</button>
+    </div>
+    <p id="detail-meta" class="detail-meta"></p>
+    <div class="filters dialog-filters">
+      <input type="search" id="search-detail" placeholder="Filter funds…">
+      <label>
+        Sort
+        <select id="sort-detail">
+          <option value="weight-desc">Weight high → low</option>
+          <option value="weight-asc">Weight low → high</option>
+          <option value="name-asc">Name A–Z</option>
+        </select>
+      </label>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Fund</th>
+            <th>Weight %</th>
+          </tr>
+        </thead>
+        <tbody id="detail-funds"></tbody>
+      </table>
+    </div>
+  </dialog>
+
+  <script src="/ui/app.js"></script>
+</body>
+</html>
