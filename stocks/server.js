@@ -1,71 +1,90 @@
-const http = require('http');
-const fs = require('fs');
+const express = require('express');
+const cors = require('cors');
 const path = require('path');
+const { connectToDatabase } = require('./db');
+const RunLog = require('./models/RunLog');
+const StockSummary = require('./models/StockSummary');
+const Change = require('./models/Change');
 
-const PORT = 8000;
+const app = express();
+const PORT = process.env.PORT || 8000;
 const ROOT = __dirname;
 
-const MIME = {
-    '.html': 'text/html',
-    '.css': 'text/css',
-    '.js': 'text/javascript',
-    '.json': 'application/json',
-};
-
-const scanCatalog = () => {
-    const resultsDir = path.join(ROOT, 'results');
-    if (!fs.existsSync(resultsDir)) return { risks: [], dates: [] };
-
-    const risks = fs.readdirSync(resultsDir, { withFileTypes: true })
-        .filter((d) => d.isDirectory())
-        .map((d) => d.name);
-
-    const dateSet = new Set();
-    risks.forEach((risk) => {
-        const files = fs.readdirSync(path.join(resultsDir, risk));
-        files.forEach((file) => {
-            const match = file.match(/stock-summary-by-coverage-(.+)\.json$/);
-            if (match) dateSet.add(match[1]);
-        });
-    });
-
-    return {
-        risks: risks.sort(),
-        dates: [...dateSet].sort().reverse(),
-    };
-};
+const normalizeRisk = (risk) => risk.replace(/ /g, '-');
 
 const sendJson = (res, data, status = 200) => {
-    res.writeHead(status, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(data));
+    res.status(status).json(data);
 };
 
-const server = http.createServer((req, res) => {
-    const url = new URL(req.url, `http://localhost:${PORT}`);
+const asyncHandler = (fn) => (req, res, next) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+};
 
-    if (url.pathname === '/api/catalog') {
-        return sendJson(res, scanCatalog());
-    }
+app.use(cors());
+app.use(express.static(path.join(ROOT, 'ui')));
 
-    let filePath = url.pathname === '/' ? '/ui/index.html' : url.pathname;
-    filePath = path.join(ROOT, filePath.replace(/^\//, ''));
-
-    if (!filePath.startsWith(ROOT)) {
-        res.writeHead(403);
-        return res.end('Forbidden');
-    }
-
-    fs.readFile(filePath, (err, data) => {
-        if (err) {
-            res.writeHead(404);
-            return res.end('Not found');
-        }
-        const ext = path.extname(filePath);
-        res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
-        res.end(data);
+app.get('/api/catalog', asyncHandler(async (req, res) => {
+    const risks = await RunLog.distinct('risk');
+    const dates = await RunLog.distinct('date');
+    sendJson(res, {
+        risks: risks.sort(),
+        dates: dates.sort().reverse(),
     });
+}));
+
+app.get('/api/summary/:risk/:date/coverage', asyncHandler(async (req, res) => {
+    const { risk, date } = req.params;
+    const doc = await StockSummary.findOne({ risk: normalizeRisk(risk), date, type: 'coverage' }).lean();
+    sendJson(res, doc?.items ?? []);
+}));
+
+app.get('/api/summary/:risk/:date/weight', asyncHandler(async (req, res) => {
+    const { risk, date } = req.params;
+    const doc = await StockSummary.findOne({ risk: normalizeRisk(risk), date, type: 'weight' }).lean();
+    sendJson(res, doc?.items ?? []);
+}));
+
+app.get('/api/summary/:risk/:date/detail', asyncHandler(async (req, res) => {
+    const { risk, date } = req.params;
+    const doc = await StockSummary.findOne({ risk: normalizeRisk(risk), date, type: 'detail' }).lean();
+    sendJson(res, doc?.items ?? []);
+}));
+
+app.get('/api/fund-changes/:risk/:date', asyncHandler(async (req, res) => {
+    const { risk, date } = req.params;
+    const doc = await Change.findOne({ risk: normalizeRisk(risk), date, type: 'fund' }).lean();
+    sendJson(res, doc?.payload ?? null);
+}));
+
+app.get('/api/stock-changes/:risk/:date', asyncHandler(async (req, res) => {
+    const { risk, date } = req.params;
+    const doc = await Change.findOne({ risk: normalizeRisk(risk), date, type: 'stock' }).lean();
+    sendJson(res, doc?.payload ?? null);
+}));
+
+app.get('/api/log/:risk/:date', asyncHandler(async (req, res) => {
+    const { risk, date } = req.params;
+    const doc = await RunLog.findOne({ risk: normalizeRisk(risk), date }).lean();
+    sendJson(res, doc ?? null);
+}));
+
+app.use((err, req, res, next) => {
+    console.error(err);
+    sendJson(res, { error: err.message || 'Internal Server Error' }, 500);
 });
 
-server.listen(PORT, () => {
-    console.log(`MF Analysis UI → http://localhost:${PORT}`);
+app.get('*', (req, res) => {
+    res.sendFile(path.join(ROOT, 'ui', 'index.html'));
+});
+
+const startServer = async () => {
+    await connectToDatabase();
+    app.listen(PORT, () => {
+        console.log(`MF Analysis UI → http://localhost:${PORT}`);
+    });
+};
+
+startServer().catch((error) => {
+    console.error('Failed to start server:', error);
+    process.exit(1);
 });

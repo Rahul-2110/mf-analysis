@@ -1,6 +1,4 @@
 const { default: axios } = require('axios');
-const fs = require('fs');
-const path = require('path');
 
 const PAGE_SIZE = 20;
 const WEIGHT_CHANGE_THRESHOLD = 0.05;
@@ -22,12 +20,100 @@ const yesterdayDate = () => {
 
 const formattedDate = formatDate(new Date());
 
-const saveFile = async (fileName, data) => {
-    const folderPath = path.dirname(fileName);
-    if (!fs.existsSync(folderPath)) {
-        fs.mkdirSync(folderPath, { recursive: true });
+const { connectToDatabase, mongoose } = require('./db');
+const RunLog = require('./models/RunLog');
+const StockSummary = require('./models/StockSummary');
+const FundSnapshot = require('./models/FundSnapshot');
+const Change = require('./models/Change');
+const SearchResult = require('./models/SearchResult');
+const MutualFund = require('./models/MutualFund');
+const { Readable } = require('stream');
+
+const persistSearchResults = async (risk, date, payload) => {
+    await SearchResult.findOneAndUpdate(
+        { risk: riskFolder(risk), date },
+        { risk: riskFolder(risk), date, payload },
+        { upsert: true, new: true }
+    );
+};
+
+const persistFilteredFunds = async (risk, date, payload) => {
+    await MutualFund.findOneAndUpdate(
+        { risk: riskFolder(risk), date },
+        { risk: riskFolder(risk), date, payload },
+        { upsert: true, new: true }
+    );
+};
+
+const persistSnapshot = async (risk, date, payload) => {
+    // Try to store payload inline; if BSON size error occurs, fallback to GridFS.
+    try {
+        await FundSnapshot.findOneAndUpdate(
+            { risk: riskFolder(risk), date, type: 'snapshot' },
+            { risk: riskFolder(risk), date, type: 'snapshot', payload, gridFsId: null, fileName: null, fileSize: null },
+            { upsert: true, new: true }
+        );
+    } catch (err) {
+        const isBsonError = err && (err.code === 'ERR_OUT_OF_RANGE' || /BSON/.test(err.message) || /serializeInto/.test(err.stack));
+        if (!isBsonError) throw err;
+
+        // Ensure DB connection
+        if (!mongoose?.connection?.db) throw err;
+
+        const bucketName = process.env.SNAPSHOT_BUCKET || 'snapshot_files';
+        const bucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db, { bucketName });
+        const filename = `snapshot-${riskFolder(risk)}-${date}.json`;
+        const stream = Readable.from([JSON.stringify(payload)]);
+
+        const uploadStream = bucket.openUploadStream(filename, { metadata: { risk: riskFolder(risk), date } });
+        await new Promise((resolve, reject) => {
+            stream.pipe(uploadStream).on('error', reject).on('finish', resolve);
+        });
+
+        const fileId = uploadStream.id;
+        // read file doc to get size
+        const filesColl = mongoose.connection.db.collection(`${bucketName}.files`);
+        const fileDoc = await filesColl.findOne({ _id: fileId });
+        const size = fileDoc?.length ?? fileDoc?.size ?? 0;
+
+        await FundSnapshot.findOneAndUpdate(
+            { risk: riskFolder(risk), date, type: 'snapshot' },
+            { risk: riskFolder(risk), date, type: 'snapshot', payload: null, gridFsId: fileId, fileName: filename, fileSize: size },
+            { upsert: true, new: true }
+        );
     }
-    await fs.promises.writeFile(fileName, JSON.stringify(data));
+};
+
+const persistStockSummary = async (risk, date, type, items) => {
+    await StockSummary.findOneAndUpdate(
+        { risk: riskFolder(risk), date, type },
+        { risk: riskFolder(risk), date, type, items },
+        { upsert: true, new: true }
+    );
+};
+
+const persistChanges = async (risk, date, type, payload) => {
+    await Change.findOneAndUpdate(
+        { risk: riskFolder(risk), date, type },
+        { risk: riskFolder(risk), date, type, payload },
+        { upsert: true, new: true }
+    );
+};
+
+const persistRunLog = async (risk, date, payload) => {
+    await RunLog.findOneAndUpdate(
+        { risk: riskFolder(risk), date },
+        { risk: riskFolder(risk), date, ...payload },
+        { upsert: true, new: true }
+    );
+};
+
+const getSavedSnapshot = async (risk, date) => {
+    return FundSnapshot.findOne({ risk: riskFolder(risk), date, type: 'snapshot' }).lean();
+};
+
+const getSavedCoverageSummary = async (risk, date) => {
+    return StockSummary.findOne({ risk: riskFolder(risk), date, type: 'coverage' }).lean();
 };
 
 const log = (risk, message) => {
@@ -120,14 +206,33 @@ const buildStockSummary = (fundSnapshots) => {
     const totalFunds = fundSnapshots.length;
     const stocksMap = {};
 
+    // For each fund, aggregate holdings by stock key so a fund only counts once per stock.
     fundSnapshots.forEach((fund) => {
-        fund.equityHoldings.forEach((holding) => {
+        const perFundMap = new Map();
+        (fund.equityHoldings || []).forEach((holding) => {
             const key = stockKey(holding);
-            if (!stocksMap[key]) {
-                stocksMap[key] = {
+            const weight = holding.corpus_per ?? 0;
+            if (!perFundMap.has(key)) {
+                perFundMap.set(key, {
                     name: holding.company_name,
                     stockSearchId: holding.stock_search_id || null,
                     sector: holding.sector_name || null,
+                    weight: weight,
+                });
+            } else {
+                // If multiple holding rows for same stock in a fund, sum weights
+                const existing = perFundMap.get(key);
+                existing.weight += weight;
+                perFundMap.set(key, existing);
+            }
+        });
+
+        perFundMap.forEach((holding, key) => {
+            if (!stocksMap[key]) {
+                stocksMap[key] = {
+                    name: holding.name,
+                    stockSearchId: holding.stockSearchId,
+                    sector: holding.sector,
                     fundCount: 0,
                     totalWeight: 0,
                     maxWeight: -Infinity,
@@ -136,7 +241,7 @@ const buildStockSummary = (fundSnapshots) => {
                 };
             }
             const entry = stocksMap[key];
-            const weight = holding.corpus_per ?? 0;
+            const weight = holding.weight;
             entry.fundCount += 1;
             entry.totalWeight += weight;
             entry.maxWeight = Math.max(entry.maxWeight, weight);
@@ -324,12 +429,8 @@ const compareStockSummaries = (todaySummary, yesterdaySummary) => {
 
 const loadYesterdaySnapshot = async (risk) => {
     const yesterday = yesterdayDate();
-    const snapshotPath = `snapshots/${riskFolder(risk)}/snapshots-${yesterday}.json`;
-    if (!fs.existsSync(snapshotPath)) {
-        return null;
-    }
-    const raw = await fs.promises.readFile(snapshotPath, 'utf8');
-    return JSON.parse(raw);
+    const record = await getSavedSnapshot(risk, yesterday);
+    return record?.payload ?? null;
 };
 
 const generateData = async (risk, percentage) => {
@@ -343,24 +444,37 @@ const generateData = async (risk, percentage) => {
         errors: [],
     };
 
+    await connectToDatabase();
     log(risk, 'Fetching funds...');
     const funds = await getMutualFundsList(risk);
     const totalFound = funds.content?.length ?? 0;
 
-    await saveFile(`search/${folder}/funds-${formattedDate}.json`, funds);
+    await persistSearchResults(risk, formattedDate, funds);
 
-    const filteredFundsList = (funds.content ?? []).filter((fund) => fund.return1y > percentage);
+    let filteredFundsList = (funds.content ?? []).filter((fund) => fund.return1y > percentage);
+
+    // Deduplicate funds by search_id in case the API returns duplicates
+    const uniqueMap = new Map();
+    let dupCount = 0;
+    for (const f of filteredFundsList) {
+        if (!uniqueMap.has(f.search_id)) uniqueMap.set(f.search_id, f);
+        else dupCount += 1;
+    }
+    if (dupCount > 0) {
+        log(risk, `Removed ${dupCount} duplicate funds from filtered list`);
+        filteredFundsList = Array.from(uniqueMap.values());
+    }
     runLog.totalFound = totalFound;
     runLog.totalFiltered = filteredFundsList.length;
 
     log(risk, `${totalFound} found, ${filteredFundsList.length} pass filter`);
 
-    await saveFile(`results/${folder}/mutual_funds-${formattedDate}.json`, filteredFundsList);
+    await persistFilteredFunds(risk, formattedDate, filteredFundsList);
 
     if (filteredFundsList.length === 0) {
         runLog.durationMs = Date.now() - startTime;
         runLog.completedAt = new Date().toISOString();
-        await saveFile(`results/${folder}/run-log-${formattedDate}.json`, runLog);
+        await persistRunLog(risk, formattedDate, runLog);
         log(risk, 'No funds after filter — done');
         return;
     }
@@ -387,8 +501,8 @@ const generateData = async (risk, percentage) => {
         funds: fundSnapshots,
     };
 
-    await saveFile(`snapshots/${folder}/snapshots-${formattedDate}.json`, snapshotPayload);
-    log(risk, `Saved snapshot → snapshots/${folder}/snapshots-${formattedDate}.json`);
+    await persistSnapshot(risk, formattedDate, snapshotPayload);
+    log(risk, `Saved snapshot for ${formattedDate}`);
 
     const stockSummary = buildStockSummary(fundSnapshots);
     const byCoverage = [...stockSummary]
@@ -398,9 +512,9 @@ const generateData = async (risk, percentage) => {
         .map(({ funds, ...rest }) => rest)
         .sort((a, b) => b.avgWeight - a.avgWeight);
 
-    await saveFile(`results/${folder}/stock-summary-by-coverage-${formattedDate}.json`, byCoverage);
-    await saveFile(`results/${folder}/stock-summary-by-avg-weight-${formattedDate}.json`, byAvgWeight);
-    await saveFile(`results/${folder}/stock-fund-detail-${formattedDate}.json`, stockSummary);
+    await persistStockSummary(risk, formattedDate, 'coverage', byCoverage);
+    await persistStockSummary(risk, formattedDate, 'weight', byAvgWeight);
+    await persistStockSummary(risk, formattedDate, 'detail', stockSummary);
 
     const top5 = byCoverage.slice(0, 5);
     if (top5.length) {
@@ -420,11 +534,11 @@ const generateData = async (risk, percentage) => {
         const yesterdayFunds = yesterdaySnapshot.funds ?? yesterdaySnapshot;
         const fundDiff = compareFundSnapshots(fundSnapshots, yesterdayFunds);
 
-        const yesterdaySummaryPath = `results/${folder}/stock-summary-by-coverage-${yesterdayDate()}.json`;
+        const yesterdaySummary = await getSavedCoverageSummary(risk, yesterdayDate());
         let stockChanges = null;
-        if (fs.existsSync(yesterdaySummaryPath)) {
-            const yesterdaySummary = JSON.parse(await fs.promises.readFile(yesterdaySummaryPath, 'utf8'));
-            stockChanges = compareStockSummaries(stockSummary, yesterdaySummary);
+
+        if (yesterdaySummary?.items) {
+            stockChanges = compareStockSummaries(stockSummary, yesterdaySummary.items);
         } else {
             stockChanges = compareStockSummaries(
                 stockSummary,
@@ -432,8 +546,8 @@ const generateData = async (risk, percentage) => {
             );
         }
 
-        await saveFile(`results/${folder}/fund-changes-${formattedDate}.json`, fundDiff);
-        await saveFile(`results/${folder}/stock-changes-${formattedDate}.json`, stockChanges);
+        await persistChanges(risk, formattedDate, 'fund', fundDiff);
+        await persistChanges(risk, formattedDate, 'stock', stockChanges);
 
         runLog.comparisonStatus = 'completed';
         runLog.comparison = {
@@ -454,11 +568,12 @@ const generateData = async (risk, percentage) => {
     const durationSec = Math.round((Date.now() - startTime) / 1000);
     runLog.durationMs = Date.now() - startTime;
     runLog.completedAt = new Date().toISOString();
-    await saveFile(`results/${folder}/run-log-${formattedDate}.json`, runLog);
+    await persistRunLog(risk, formattedDate, runLog);
     log(risk, `Done in ${durationSec}s`);
 };
 
-(async () => {
+const generateAllRisks = async () => {
+    await connectToDatabase();
     const risks = [
         { type: 'Very High', percentage: 0 },
         { type: 'High', percentage: 0 },
@@ -469,4 +584,6 @@ const generateData = async (risk, percentage) => {
     for (const risk of risks) {
         await generateData(risk.type, risk.percentage);
     }
-})();
+};
+
+module.exports = { generateData, generateAllRisks };

@@ -19,13 +19,33 @@ const panelState = {
     weight: { sortKey: 'avgWeight', sortDir: 'desc' },
 };
 
+const API_BASE = (window && window.API_BASE) || '';
+
 const fetchJson = async (path) => {
-    const res = await fetch(path);
+    const url = path.startsWith('/') ? API_BASE + path : path;
+    const res = await fetch(url);
     if (!res.ok) return null;
     return res.json();
 };
 
-const resultPath = (risk, date, file) => `results/${risk}/${file}-${date}.json`;
+const resultPath = (risk, date, file) => {
+    switch (file) {
+        case 'fund-changes':
+            return `/api/fund-changes/${risk}/${date}`;
+        case 'stock-changes':
+            return `/api/stock-changes/${risk}/${date}`;
+        case 'stock-summary-by-coverage':
+            return `/api/summary/${risk}/${date}/coverage`;
+        case 'stock-summary-by-avg-weight':
+            return `/api/summary/${risk}/${date}/weight`;
+        case 'stock-fund-detail':
+            return `/api/summary/${risk}/${date}/detail`;
+        case 'run-log':
+            return `/api/log/${risk}/${date}`;
+        default:
+            return '';
+    }
+};
 
 const formatPct = (n) => `${Number(n).toFixed(2)}%`;
 
